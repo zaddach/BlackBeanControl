@@ -8,6 +8,7 @@ import Settings
 import string
 from os import path
 from Crypto.Cipher import AES
+import binascii
 
 SettingsFile = configparser.ConfigParser()
 SettingsFile.optionxform = str
@@ -252,7 +253,7 @@ else:
     CommandFromSettings = ''
 
 if CommandFromSettings.strip() != '':
-    DecodedCommand = CommandFromSettings.decode('hex')
+    DecodedCommand = binascii.unhexlify(CommandFromSettings)
     RM3Device.send_data(DecodedCommand)
 else:
     RM3Device.enter_learning()
